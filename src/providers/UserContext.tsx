@@ -3,6 +3,7 @@ import { TRegisterFormValues } from "../components/Form/RegisterForm/registerFor
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { TLoginFormValues } from "../components/Form/LoginForm/loginFormSchema";
+import { toast } from "react-toastify";
 
 interface IUserProviderProps {
     children: React.ReactNode;
@@ -71,6 +72,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
             await api.post<IUserRegisterResponse>("/users", formData)
             navigate("/")
         } catch (error) {
+            toast.error("Ops... Algo deu errado!")
             console.log(error)
         }
     }
@@ -83,7 +85,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
             setUser(data.user)
             navigate("/shop")
         } catch (error) {
-            console.log(error)
+            toast.error("Ops... Algo deu errado!")
         }
     }
 
